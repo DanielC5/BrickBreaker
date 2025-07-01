@@ -1,2 +1,2 @@
 # BrickBreaker
-Brick Breaker game
+Brick Breaker game with multiple levels and powerups
