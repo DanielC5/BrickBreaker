@@ -36,6 +36,7 @@ public class BallMovement : MonoBehaviour
         //starts the ball moving when up arrow or W key pressed
         if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && GameManager.Instance.state == GameManager.GameState.Game)
         {
+            //sets the state to the playing state
             GameManager.Instance.state = GameManager.GameState.Playing;
             //turn 18 and release the parent
             transform.SetParent(null);
@@ -43,7 +44,7 @@ public class BallMovement : MonoBehaviour
 
         if (GameManager.Instance.state == GameManager.GameState.Playing)
         {
-            // move the ball
+            // move the ball if currently playing the game
             transform.Translate(dir * speed * Time.deltaTime);
 
         }
@@ -65,10 +66,12 @@ public class BallMovement : MonoBehaviour
         //hit a brick?
         if (collision.gameObject.CompareTag("Brick"))
         {
+            //tells the brick it got hit (because its a brick and needs to be told that)
             collision.gameObject.GetComponent<BrickController>().Hit();
 
             //increase the speed wen hit brick;
             ChangeSpeed(0.2f);
+            //play silly brick bounce sfx
             SoundManager.Instance.PlayBrickBounce();
         }
 
@@ -106,6 +109,7 @@ public class BallMovement : MonoBehaviour
 
     public void moveBall()
     {
+        //releases the parent 
         transform.SetParent(null);
         dir = Vector3.down;
 

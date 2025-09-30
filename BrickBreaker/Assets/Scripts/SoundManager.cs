@@ -4,6 +4,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance = null;
 
+    //all the audio clips lol
     public AudioClip bounceSFX;
     public AudioClip brickBounceSFX;
     public AudioClip breakSFX;
@@ -44,53 +45,62 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBounce()
     {
+        //wall and paddle bounce game 
         audioPlayer.PlayOneShot(bounceSFX);
 
     }
 
     public void PlayBrickBounce()
     {
+        //brick bounce noise
         audioPlayer.PlayOneShot(brickBounceSFX);
 
     }
 
     public void PlayBreak()
     {
+        //block break noise
         audioPlayer.PlayOneShot(breakSFX);
 
     }
 
     public void PlayButton()
     {
+        //button noise lol
         audioPlayer.PlayOneShot(buttonSFX);
 
     }
 
     public void PlayDeath()
     {
+        //plays death sound effects
         audioPlayer.PlayOneShot(deathSFX);
 
     }
 
     public void PlayMusic()
     {
+        //plays game music
         audioPlayer.clip = music; 
         audioPlayer.Play();
     }
 
     public void StopMusic()
     {
+        //stops the music
         audioPlayer.Stop();
     }
 
     public void PlayMenuMusic()
     {
+        //plays the menu music
         audioPlayer.clip = menuMusic; 
         audioPlayer.Play();
     }
 
     public void StopMenuMusic()
     {
+        //stops the menu music
         audioPlayer.Stop();
     }
 

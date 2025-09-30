@@ -3,6 +3,7 @@ using System.Reflection;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class PaddleController : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PaddleController : MonoBehaviour
 
     private int direction; // 0 = not moving, -1 = left, 1 = right
 
-    private float maxX;
+    private float maxX; //sets the bounds of paddle movement
     private float minX;
 
     public int paddleNum; //paddle number (1 or 2)
@@ -19,11 +20,11 @@ public class PaddleController : MonoBehaviour
     void Start()
     {
         direction = 0;
-        maxX = 6.235f;
+        maxX = 6.235f; // all numbers gotten  from just playing the game
         minX = -6.737f;
         if (PlayerPrefs.GetInt("PlayerCount", 1) == 1 && paddleNum == 2)
         {
-            Destroy(this.gameObject);
+            Destroy(this.gameObject); //destroys second paddle if playercount is 1
         }
     }
 
@@ -32,6 +33,7 @@ public class PaddleController : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("PlayerCount", 1) == 2)
         {
+            //sets keybinds for player 1 (wasd, well ad)
             if (paddleNum == 1)
             {
                 // get user input
@@ -48,6 +50,7 @@ public class PaddleController : MonoBehaviour
                     direction = 0;
                 }
             }
+            //sets keybinds for player 2 (left and right arrows)
             else
             {
                 // get user input
@@ -66,8 +69,8 @@ public class PaddleController : MonoBehaviour
             }
         }
         else
-        {
-            // get user input
+        {   
+            // get user input for single player
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 Debug.Log("A Key was pressed, move left.");
@@ -96,6 +99,7 @@ public class PaddleController : MonoBehaviour
 
     public void SpeedUp(float mult)
     {
+        //speeds up with multiplier :D
         StartCoroutine("TempSpeed", mult);
     }
 
@@ -112,16 +116,19 @@ public class PaddleController : MonoBehaviour
 
         //StartCoroutine("TempLonger", mult);
         //TODO: Implement this properly
+        // never made the paddle longer
     }
 
     IEnumerator TempLonger(float multiplier)
     {
+        //obsolete function
         gameObject.transform.localScale = new Vector3(transform.localScale.x * 2, transform.localScale.y, transform.localScale.z);
         yield return null;
     }
 
     public void setPaddleNum(int num)
     {
+        //sets the paddle number lol
         paddleNum = num;
     }
 }

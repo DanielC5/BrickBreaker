@@ -4,11 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class BrickSpawner : MonoBehaviour
 {
+    //all the different colors and kinds of bricks as prefabs
     public GameObject[] brickPrefabs;
-
+    //number of rows (preset)
     private int numRows = 5;
+    //number of columns preset
     private int numCols = 13;
+    //width of an actual brick (preset)
     private float brickWidth = 1.21f;
+    //height of an actual brick (preset)
     private float brickHeight = 0.65f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +29,7 @@ public class BrickSpawner : MonoBehaviour
         }
         else
         {
-            SpawnBricks(3);
+            SpawnBricks(3); // if nothing else then just use pattern 3
         }
 
     }
@@ -52,6 +56,7 @@ public class BrickSpawner : MonoBehaviour
                     Vector3 brickPos = new Vector3(transform.position.x + c * brickWidth, transform.position.y - brickHeight * r, transform.position.z);
                     //creates a new brick at the position=
                     Instantiate(brickPrefabs[brickIndex], brickPos, transform.rotation);
+                    //adds to number of bricks that need to be destrouyed when you play the game
                     GameManager.Instance.AddBrickCount();
                 }
                 
@@ -78,6 +83,7 @@ public class BrickSpawner : MonoBehaviour
         {
             //Index Selection
             //Pattern: Eyes 
+            // just makes eyes lol idk
             brickIndex = 0; //sets the entire area to red
             if (col >= 5 && col <= 7)
             {
@@ -98,6 +104,7 @@ public class BrickSpawner : MonoBehaviour
         {
             //Index Selection
             //Pattern: t
+            //what can i say it looks like a t
             if (row == 2 || col == 5) //draws stripes one by one and overrides the colors as it goes on to create the effect
             {
                 brickIndex = 2;

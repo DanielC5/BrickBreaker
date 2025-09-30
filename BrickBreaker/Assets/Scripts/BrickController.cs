@@ -21,6 +21,7 @@ public class BrickController : MonoBehaviour
     //prevents double counting a hit
     private bool isHit;
 
+    //particle spawner
     private ParticleSpawner ps;
 
 
@@ -28,7 +29,8 @@ public class BrickController : MonoBehaviour
     void Start()
     {
         isHit = false;
-
+        
+        //gets the particle spawner from the environment
         ps = GameObject.Find("ParticleSpawner").GetComponent<ParticleSpawner>();
     }
 
@@ -53,7 +55,9 @@ public class BrickController : MonoBehaviour
             }
             else
             {
+                //set is hit to true to prevent double hits
                 isHit = true;
+                //makes the particles appear
                 ps.spawnParticles(this.transform,GetComponent<Renderer>());
                 // subtract the brick form the total count
                 GameManager.Instance.SubtractBrickCount();
@@ -72,13 +76,15 @@ public class BrickController : MonoBehaviour
                 }
                 if (speedUp)
                 {
+                    //gets the paddle and makesit faster
                     GameObject paddle = GameObject.Find("Paddle");
                     paddle.GetComponent<PaddleController>().SpeedUp(1.2f); //increase speed
                     GameObject paddle2 = GameObject.Find("Paddle2");
                     paddle2.GetComponent<PaddleController>().SpeedUp(1.2f); //increase speed
                 }
-                if (doublePointsMult) //i don;t think i will figure this out anytime soon
+                if (doublePointsMult) 
                 {
+                    //temporary double pointage
                     GameManager.Instance.DoublePoints();
                 }
                 //Finally... destroy the brick
@@ -102,6 +108,7 @@ public class BrickController : MonoBehaviour
             transform.Translate(Vector3.down * 0.1f);
             yield return new WaitForSeconds(0.01f);
         }
+        //destroys the gameobject after it moves down enough
         Destroy(this.gameObject);
 
         yield return null;
@@ -113,8 +120,10 @@ public class BrickController : MonoBehaviour
         Material mat = GetComponent<Renderer>().material;
         Color col = mat.color;
         Debug.Log(col.r);
+        //turns the color white
         mat.color = new Color(1, 1, 1, 0.7f);
         yield return new WaitForSeconds(0.2f);
+        //resets the color back to what it was but a bit lighter to show that it got hit
         mat.color = new Color(col.r + 0.1f, col.g + 0.1f, col.b + 0.1f, 1f);
     }
     

@@ -14,6 +14,7 @@ public class WinLoseUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //deactivates the panel initially
         panel.SetActive(false);
         text = endText.GetComponent<TextMeshProUGUI>();
     }
@@ -23,11 +24,13 @@ public class WinLoseUI : MonoBehaviour
     {
         if (GameManager.Instance.state == GameManager.GameState.Win)
         {
+            //tells you you won
             panel.SetActive(true);
             text.SetText("You win! Congrats!");
         }
         else if (GameManager.Instance.state == GameManager.GameState.Lose)
         {
+            //tells you you lost
             panel.SetActive(true);
             text.SetText("You lose :c Try again 3:");
         }
